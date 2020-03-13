@@ -13,9 +13,13 @@ import android.widget.ImageView;
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentBodyPart extends Fragment {
+
+    private final String IMAGE_ID_LIST="image_ids";
+    private final String LIST_INDEX="list_index";
 
     private final String LOG_TAG="FragmentBodyPart";
     private List<Integer> mImageIds;
@@ -30,6 +34,11 @@ public class FragmentBodyPart extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.fragment_body_part,container,false);
         final ImageView imageView=(ImageView) rootView.findViewById(R.id.fragment_body_part_imageview);
+
+        if(savedInstanceState!=null){
+            mImageIds=savedInstanceState.getIntegerArrayList(IMAGE_ID_LIST);
+            mListIndex=savedInstanceState.getInt(LIST_INDEX);
+        }
 
         if(mImageIds!=null) {
             imageView.setImageResource(mImageIds.get(mListIndex));
@@ -53,5 +62,12 @@ public class FragmentBodyPart extends Fragment {
     }
     public void setmListIndex(int index){
         mListIndex=index;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle currentState) {
+        currentState.putIntegerArrayList(IMAGE_ID_LIST,(ArrayList<Integer>) mImageIds);
+        currentState.putInt(LIST_INDEX,mListIndex);
+
     }
 }
