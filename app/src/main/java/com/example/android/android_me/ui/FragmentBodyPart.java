@@ -29,13 +29,22 @@ public class FragmentBodyPart extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.fragment_body_part,container,false);
-        ImageView imageView=(ImageView) rootView.findViewById(R.id.fragment_body_part_imageview);
+        final ImageView imageView=(ImageView) rootView.findViewById(R.id.fragment_body_part_imageview);
 
         if(mImageIds!=null) {
             imageView.setImageResource(mImageIds.get(mListIndex));
 
         }
         else Log.e(LOG_TAG,"Invalid Image ids");
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListIndex++;
+                if(mListIndex>mImageIds.size()-1) mListIndex=0;
+                imageView.setImageResource(mImageIds.get(mListIndex));
+            }
+        });
 
         return  rootView;
     }
