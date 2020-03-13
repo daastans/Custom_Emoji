@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.android_me.R;
+import com.example.android.android_me.data.AndroidImageAssets;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -36,8 +37,12 @@ public class AndroidMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_android_me);
 
         FragmentBodyPart headFragment= new FragmentBodyPart();
+        headFragment.setmImageIds(AndroidImageAssets.getHeads());
+        headFragment.setmListIndex(4);
 
         FragmentManager fragmentManager= getFragmentManager();
         fragmentManager.beginTransaction().add(R.id.head_container,headFragment).commit();
+
+
     }
 }
