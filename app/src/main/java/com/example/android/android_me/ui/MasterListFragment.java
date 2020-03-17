@@ -15,15 +15,17 @@ import java.util.List;
 
 public class MasterListFragment extends Fragment {
 
-    private MasterListAdapter masterListAdapter;
+
     public MasterListFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        masterListAdapter=new MasterListAdapter(container.getContext(),AndroidImageAssets.getAll());
-        GridView rootView=(GridView) inflater.inflate(R.layout.fragment_master_list,container,false);
-        rootView.setAdapter(masterListAdapter);
+
+        final View rootView = inflater.inflate(R.layout.fragment_master_list, container, false);
+        GridView gridView=(GridView) rootView.findViewById(R.id.images_grid_view);
+
+        gridView.setAdapter(new MasterListAdapter(rootView.getContext(),AndroidImageAssets.getAll()));
         return rootView;
 
     }
